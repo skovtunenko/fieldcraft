@@ -1,0 +1,6 @@
+interface:
+  display_name: "Blunt Tone"
+  short_description: "Lower prose reading cost without changing its content"
+  default_prompt: "Use $blunt-tone to rewrite this response in precise, plain language without changing its content."
+policy:
+  allow_implicit_invocation: false
