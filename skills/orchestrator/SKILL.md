@@ -2,7 +2,7 @@
 name: orchestrator
 description: Session mode that works directly and delegates to subagents only for a named advantage, picking worker models by tier. Load only on "orchestrator on" or /orchestrator; it holds until "orchestrator off".
 metadata:
-  version: "2026.11.20.1"
+  version: "2026.11.25.1"
   kind: mode
 ---
 
@@ -12,7 +12,8 @@ Model tiers, lowest to highest: fast < standard < strong < frontier.
 DOER = standard tier. REASONING = strong tier.
 Frontier only when the user names it.
 Override: `orchestrator on doer=<model> reasoning=<model>`.
-Map tiers to the models this runtime can spawn now; remembered names do not count.
+Map tiers to the models the spawn tool offers now; name both on activation.
+Remembered names do not count.
 
 Active until "orchestrator off".
 On activation, confirm mode/models; execute included task or wait.
@@ -31,15 +32,18 @@ Delegate when context separation outweighs handoff cost:
 
 Size, complexity or specialization alone never justify delegation.
 Keep tightly coupled steps and shared evidence together.
-Before spawning, name the concrete advantage; otherwise work directly.
+Before spawning, write in the reply, above the spawn call:
+`Advantage: <parallel work | noisy exploration | fresh review | isolation> — <why>`.
+No such line → work directly.
 
 When delegating:
 DOER for clear execution; REASONING for uncertain judgment.
 Unsupported model → default; no workers → direct.
 Report actual models or unknown.
-Brief: goal/advantage | context/rules | read scope/editable paths |
-check → expected result.
-Return: result | files | evidence | assumptions/blockers; ≤30 lines.
+Brief: `Goal:` and `Advantage:` lines first | context/rules | read scope/editable paths |
+check → expected result | the Return contract below.
+Return: result | files | evidence | assumptions/blockers; ≤30 lines;
+bulk output → a file the worker writes.
 Reuse workers for related follow-ups; fresh context for independent review.
 One writer per file, including generated files; serialize overlaps.
 Workers leave Git, external actions and further delegation to you.
@@ -57,4 +61,5 @@ External/destructive actions require authorization.
 Commit only verified task hunks; preserve others' edits/staging.
 Unclear ownership → no commit.
 
-Final: outcome, checks/gaps, commits, material decisions, actual models.
+Final: outcome, checks/gaps, commits, material decisions, actual models;
+five labelled lines, also with no workers; "none" when empty.

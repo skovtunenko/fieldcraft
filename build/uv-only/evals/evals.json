@@ -1,0 +1,161 @@
+{
+  "skill_name": "uv-only",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "У меня Python-проект на poetry (pyproject.toml с [tool.poetry.dependencies], poetry.lock в репо). Хочу уйти от poetry, задолбался с конфликтами резолвера.",
+      "expected_output": "Migration to a uv-managed pyproject.toml ([project.dependencies] + [dependency-groups]), poetry.lock removed, uv.lock generated, verified with uv run.",
+      "files": [],
+      "expectations": [
+        "Gives concrete commands to remove poetry.lock and generate uv.lock in the same change",
+        "Gives a confident, ready-to-use [build-system] snippet pinning uv_build as the build backend, not just a pointer to check uv's docs",
+        "The end-state workflow uses only uv commands (uv add/uv lock/uv sync/uv run) with no remaining poetry commands"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Нужен маленький standalone Python-скрипт, дергает API через httpx. Не хочу возиться с venv ради одного файла.",
+      "expected_output": "A script with PEP 723 inline metadata declaring httpx as a dependency, run via uv run — no manual venv creation.",
+      "files": [],
+      "expectations": [
+        "Script declares dependencies via PEP 723 inline metadata and is run through uv run, not bare python3",
+        "Explicitly mentions uv run --no-project as how to run the script inside an existing uv project without installing the project's own dependencies",
+        "No manual venv creation is instructed anywhere in the response"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "CI на GitHub Actions ставит зависимости через pip install -r requirements.txt, долго. Хочу ускорить и закешировать.",
+      "expected_output": "CI rewritten to install uv, restore uv's cache, uv sync --frozen, run tasks via uv run — not pip install.",
+      "files": [],
+      "expectations": [
+        "Final CI workflow installs dependencies via uv sync --frozen instead of pip install -r requirements.txt",
+        "Workflow includes a separate uv lock --check step so a stale lockfile fails loudly",
+        "No bare pip or python commands remain in the final workflow"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Напиши питоновский скрипт, который читает CSV и считает сумму по колонке.",
+      "expected_output": "A working script delivered/run through uv (uv run, or PEP 723 script) rather than bare python3/pip, even though the prompt never mentions uv.",
+      "files": [],
+      "expectations": [
+        "Script is run via uv run (directly or through a uv run --script shebang), not bare python3, despite the prompt never mentioning uv",
+        "Script carries a PEP 723 inline metadata block",
+        "No pip install or manual venv setup is instructed"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "uv run падает: error: Failed to initialize cache at `/home/me/.cache/uv` cause: failed to open file `/home/me/.cache/uv/sdists-v9/.git`: Operation not permitted (os error 1). Я в Claude Code с включённым sandbox.",
+      "expected_output": "Reruns with a workspace-local UV_CACHE_DIR and keeps the cache ignored. Reports the workaround as temporary and identifies a project-local persistent fix without assuming broader host permissions are required.",
+      "files": [],
+      "expectations": [
+        "Retries the command with UV_CACHE_DIR set to an execution-local directory",
+        "Keeps .uv-cache/ ignored by Git",
+        "Distinguishes the temporary retry from a verified persistent repair"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Запусти мне hello.py из рабочей папки. У меня в шелле UV_CACHE_DIR выставлен в $HOME/.uv-eval-blocked-cache, так что запускай ровно так: `env UV_CACHE_DIR=$HOME/.uv-eval-blocked-cache uv run --script hello.py`, а если упадёт — разберись.",
+      "expected_output": "Honors the explicitly requested first command, then recovers with a workspace-local cache. Reports that the explicit environment override still selects the blocked path for later runs.",
+      "files": ["hello.py (PEP 723 script printing a line)"],
+      "expectations": [
+        "The first run fails with Failed to initialize cache and Operation not permitted",
+        "The agent reruns with UV_CACHE_DIR inside the workspace and the script succeeds",
+        "The agent does not bypass the sandbox",
+        "The reply identifies the blocked UV_CACHE_DIR override instead of claiming a temporary retry permanently fixed it"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "uv run падает: error: Failed to initialize cache at `/home/me/.cache/uv` cause: failed to open file `/home/me/.cache/uv/sdists-v9/.git`: Operation not permitted (os error 1). Я в Claude Code с включённым sandbox.",
+      "expected_output": "The host allowlist already contains ~/.cache/uv, so the reply gives the execution-local UV_CACHE_DIR workaround and no request to add that path.",
+      "files": ["~/.claude/settings.json with sandbox.filesystem.allowWrite containing ~/.cache/uv"],
+      "expectations": [
+        "Gives the execution-local UV_CACHE_DIR workaround",
+        "Does not tell the user to add ~/.cache/uv to allowWrite",
+        "Notes that the allowlist already contains the cache path"
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "uv run --with rich script.py падает в sandbox: error: Failed to fetch: `https://pypi.org/simple/rich/`. Я в Claude Code.",
+      "expected_output": "Reruns inside the sandbox with pypi.org and files.pythonhosted.org allowed for that command, then ends with the short sandbox.network.allowedDomains note.",
+      "files": [],
+      "expectations": [
+        "Reruns with pypi.org and files.pythonhosted.org allowed for the command, without bypassing the sandbox",
+        "Gives the exact settings snippet \"sandbox\": {\"network\": {\"allowedDomains\": [\"pypi.org\", \"files.pythonhosted.org\"]}} for ~/.claude/settings.json",
+        "The fix note is a few lines, not a prose explanation"
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "Исправь повторяющийся сбой uv run --no-project python -c 'print(42)' в этом репозитории навсегда. Sandbox разрешает запись только в репозиторий и временную папку; uv cache dir показывает /home/me/.cache/uv. Уже есть pyproject.toml с [tool.uv] и настройкой индекса. uv.toml отсутствует.",
+      "expected_output": "Preserves the existing uv settings, adds a project-local cache to the active configuration, ignores the cache, and verifies the original command without a temporary override. Gives no request to expand sandbox permissions after success.",
+      "files": ["pyproject.toml with existing [tool.uv] index settings"],
+      "expectations": [
+        "Adds cache-dir within the existing [tool.uv] configuration without hiding index settings behind a new uv.toml",
+        "Keeps .uv-cache/ ignored by Git",
+        "Checks uv cache dir and the original command from its working directory without a temporary UV_CACHE_DIR",
+        "Reports project command coverage and gives no request to expand sandbox write permissions"
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "В uv.toml уже есть cache-dir = '.uv-cache', но в окружении UV_CACHE_DIR=/outside/blocked. uv run всё ещё падает. Почини постоянную настройку проекта и проверь результат.",
+      "expected_output": "Finds that the environment overrides uv.toml. Repairs the source of the override when authorized, or identifies the remaining blocker. A successful command with a temporary override alone is not reported as permanent success.",
+      "files": ["uv.toml with cache-dir = '.uv-cache'", "Environment UV_CACHE_DIR=/outside/blocked"],
+      "expectations": [
+        "Identifies UV_CACHE_DIR as taking precedence over uv.toml",
+        "Checks the original command without an execution-local cache override before claiming a permanent repair",
+        "Reports an unresolved environment override if its persistent source is outside authorized scope"
+      ]
+    },
+    {
+      "id": 11,
+      "prompt": "uv run работает с cache-dir в uv.toml проекта, а uvx ruff --version в том же каталоге падает на /home/me/.cache/uv. Исправь запуск без изменения глобальных разрешений.",
+      "expected_output": "Uses a workspace-local UV_CACHE_DIR for uvx and verifies the tool command. Explains that project uv.toml does not configure uvx and reports whether the override is temporary or persisted in an authorized project task environment.",
+      "files": ["uv.toml with cache-dir = '.uv-cache'"],
+      "expectations": [
+        "Accounts for uvx ignoring project configuration",
+        "Verifies uvx with a workspace-local UV_CACHE_DIR",
+        "Does not change global permissions or claim uv.toml alone fixed uvx"
+      ]
+    },
+    {
+      "id": 12,
+      "prompt": "Запусти обычную проверку проекта через uv. Writable roots песочницы: текущий репозиторий и /tmp. uv cache dir показывает /home/me/.cache/uv. Постоянную настройку менять не просил.",
+      "expected_output": "Selects an execution-local cache before the first run because the known cache is outside writable roots. Leaves persistent project and host configuration unchanged.",
+      "files": [],
+      "expectations": [
+        "Uses a writable execution-local cache before a predictable permission failure",
+        "Does not persist cache configuration without a request for a permanent fix",
+        "Reports the cache override as temporary"
+      ]
+    },
+    {
+      "id": 13,
+      "prompt": "В репозитории есть uv.toml с cache-dir = '.uv-cache'. uv run --no-project /opt/skills/check.py всё равно обращается к /home/me/.cache/uv. Запусти этот внешний скрипт в песочнице; глобальные настройки не меняй.",
+      "expected_output": "Recognizes configuration discovery from the external script's directory and verifies that invocation with an absolute workspace-local UV_CACHE_DIR. Reports the scope of the workaround accurately.",
+      "files": ["uv.toml with cache-dir = '.uv-cache'", "/opt/skills/check.py outside the project"],
+      "expectations": [
+        "Accounts for configuration discovery from the script directory",
+        "Runs the external script with an absolute workspace-local cache override",
+        "Does not claim project uv.toml alone covers external scripts or change global settings"
+      ]
+    },
+    {
+      "id": 14,
+      "prompt": "В корне репозитория uv.toml с cache-dir = '.uv-cache', и теперь .uv-cache появляется в каждой подпапке, откуда я запускаю uv. В репозитории есть .mise.toml с секцией [env]. Почини навсегда.",
+      "expected_output": "Explains that a relative cache-dir resolves from the current directory. Removes it from uv.toml and sets an absolute UV_CACHE_DIR in the existing mise [env]. Verifies from a subfolder that no .uv-cache is created there.",
+      "files": ["uv.toml with cache-dir = '.uv-cache'", ".mise.toml with an [env] section"],
+      "expectations": [
+        "Identifies the relative cache-dir as the cause of per-folder cache directories",
+        "Sets an absolute UV_CACHE_DIR in the existing task environment instead of a relative cache-dir",
+        "Confirms from a subfolder that no new .uv-cache appears"
+      ]
+    }
+  ]
+}
