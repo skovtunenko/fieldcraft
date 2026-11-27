@@ -3,8 +3,12 @@
 [![check](https://github.com/skovtunenko/fieldcraft/actions/workflows/check.yml/badge.svg)](https://github.com/skovtunenko/fieldcraft/actions/workflows/check.yml)
 [![release](https://img.shields.io/github/v/release/skovtunenko/fieldcraft?sort=date)](https://github.com/skovtunenko/fieldcraft/releases/latest)
 [![license](https://img.shields.io/github/license/skovtunenko/fieldcraft)](https://github.com/skovtunenko/fieldcraft/blob/main/LICENSE)
+[![skills](https://img.shields.io/badge/skills-10-blue)](#skills)
+[![agents](https://img.shields.io/badge/agents-Claude%20Code%20%C2%B7%20Codex-6e56cf)](#install)
+[![evals](https://img.shields.io/badge/evals-uv%20%C2%B7%20node-de5fe9)](#evals)
 
-Agent skills for daily engineering work and for how an agent talks to you.
+Agent skills for engineering work, skill audits, interviews, and how an agent
+talks to you.
 Each skill is one folder with a `SKILL.md` in the Agent Skills format, which
 Claude Code and Codex read. Each skill ships with its eval cases.
 
@@ -13,7 +17,10 @@ Claude Code and Codex read. Each skill ships with its eval cases.
 | Skill | What it does | Starts when |
 | --- | --- | --- |
 | [`ambition-lens`](https://github.com/skovtunenko/fieldcraft/blob/main/skills/ambition-lens/SKILL.md) | finds where the current task could aim higher and ranks at most three bigger versions | you call it by name |
+| [`auditing-skill-best-practices`](https://github.com/skovtunenko/fieldcraft/blob/main/skills/auditing-skill-best-practices/SKILL.md) | audits one skill against Anthropic's skill-authoring rules: a script checks the mechanical rules, the agent judges the rest, and you get a report and an optional review page | you call it by name |
 | [`blunt-tone`](https://github.com/skovtunenko/fieldcraft/blob/main/skills/blunt-tone/SKILL.md) | rewrites prose so it is cheaper to read, without a change in meaning | you call it by name |
+| [`go-contract-mode`](https://github.com/skovtunenko/fieldcraft/blob/main/skills/go-contract-mode/SKILL.md) | designs the contract of a Go feature with you and writes it into the project as code that compiles, with stubs in place of behavior | you say "go contract mode" |
+| [`interview-helper-builder`](https://github.com/skovtunenko/fieldcraft/blob/main/skills/interview-helper-builder/SKILL.md) | builds one offline HTML page for an interview with one candidate, from the role, the CV, and earlier feedback: questions, signals to rate, a timer, and a scorecard | you call it by name |
 | [`mise-it`](https://github.com/skovtunenko/fieldcraft/blob/main/skills/mise-it/SKILL.md) | turns repeated steps into documented [mise](https://mise.jdx.dev/) tasks that a person and an agent both run | you say "mise it" |
 | [`orchestrator`](https://github.com/skovtunenko/fieldcraft/blob/main/skills/orchestrator/SKILL.md) | a session mode: the agent works directly and delegates to subagents only for a named advantage | you say "orchestrator on" |
 | [`reply-contract`](https://github.com/skovtunenko/fieldcraft/blob/main/skills/reply-contract/SKILL.md) | ends each reply with a numbered list of what the agent needs from you and a fixed status line | every reply |
@@ -44,12 +51,13 @@ By hand: copy `skills/<name>` into the skills folder of your agent.
 ## Evals
 
 `build/<name>/evals/` holds the eval cases of each skill: prompts, the boxes
-that a pass needs, and grader prompts. Some skills also have a checker
-script. Run a checker from its `evals/` folder:
+that a pass needs, grader prompts, and fixtures. Some skills also have
+checker or test scripts; they need [uv](https://docs.astral.sh/uv/), and some
+also need Node.js. Run a script from its `evals/` folder:
 
 ```bash
-cd build/reply-contract/evals
-uv run check_reply.py --self-test
+(cd build/reply-contract/evals && uv run check_reply.py --self-test)
+(cd build/interview-helper-builder/evals && bash scripts/test_generator.sh)
 ```
 
 Each `cases.md` starts with how to run its cases. Keep run results outside
@@ -59,7 +67,7 @@ the repository.
 
 ```text
 skills/<name>/        the skill: SKILL.md, agents/, references/, assets/
-build/<name>/evals/   eval cases, grader prompts, checker scripts
+build/<name>/evals/   eval cases, grader prompts, fixtures, test scripts
 .mise/tasks/          the check task
 ```
 

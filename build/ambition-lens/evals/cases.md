@@ -150,7 +150,7 @@ inspection: `SKILL.md` has `disable-model-invocation: true` and
 
 ## C8 — Retro of a session a skill drove, Russian
 
-> Пользователь: `$transcript-insights-summary` по
+> Пользователь: `$call-notes` по
 > `calls/2026-10-15-acme-kickoff.txt`
 > Агент: Готово: `insights.md` и `summary.md`, 14 инсайтов, 6 открытых
 > вопросов.
@@ -160,13 +160,13 @@ inspection: `SKILL.md` has `disable-model-invocation: true` and
 Invocation: `$ambition-lens ретро`
 
 - [ ] Prose is Russian
-- [ ] Names a concrete change to `transcript-insights-summary` that would have
+- [ ] Names a concrete change to `call-notes` that would have
   produced the 3 decisions the user wrote by hand
 - [ ] Uses the 6 open questions or the 3 decisions as a fact
 
 ## C8-en — Retro of a session a skill drove, English (pair of C8)
 
-> User: `$transcript-insights-summary` on
+> User: `$call-notes` on
 > `calls/2026-10-15-acme-kickoff.txt`
 > Agent: Done: `insights.md` and `summary.md`, 14 insights, 6 open
 > questions.
@@ -176,13 +176,13 @@ Invocation: `$ambition-lens ретро`
 Invocation: `$ambition-lens retro`
 
 - [ ] Prose is English
-- [ ] Names a concrete change to `transcript-insights-summary` that would have
+- [ ] Names a concrete change to `call-notes` that would have
   produced the 3 decisions the user wrote by hand
 - [ ] Uses the 6 open questions or the 3 decisions as a fact
 
 ## C8-uk — Retro of a session a skill drove, Ukrainian (pair of C8)
 
-> Користувач: `$transcript-insights-summary` для
+> Користувач: `$call-notes` для
 > `calls/2026-10-15-acme-kickoff.txt`
 > Агент: Готово: `insights.md` і `summary.md`, 14 інсайтів, 6 відкритих
 > питань.
@@ -192,7 +192,7 @@ Invocation: `$ambition-lens retro`
 Invocation: `$ambition-lens ретро`
 
 - [ ] Prose is Ukrainian
-- [ ] Names a concrete change to `transcript-insights-summary` that would have
+- [ ] Names a concrete change to `call-notes` that would have
   produced the 3 decisions the user wrote by hand
 - [ ] Uses the 6 open questions or the 3 decisions as a fact
 
