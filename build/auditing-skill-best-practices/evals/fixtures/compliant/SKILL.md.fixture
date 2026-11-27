@@ -1,0 +1,20 @@
+---
+name: filling-pdf-forms
+description: Fills PDF form fields from a JSON mapping and checks the mapping against the form before writing. Use when the user wants to fill, complete, or validate a PDF form.
+---
+
+# Filling PDF forms
+
+Fill a form in two steps. To only validate a mapping, run step 1 and report
+its output.
+
+1. Run `python3 scripts/check_fields.py <fields.txt> <values.json>`,
+   where `fields.txt` lists the form's field names, one per line.
+   It prints one line per unknown field, with the list of valid
+   field names, and exits 1 on any problem. Fix the mapping and run it
+   again until it exits 0. On exit 2 an input is unreadable: stop and
+   report it.
+2. Fill the form with the checked mapping.
+
+For checkbox, radio, and date fields, read
+[references/field-types.md](references/field-types.md) before writing values.

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Go Contract Mode"
+  short_description: "Grill Go contracts and edit compilable skeletons only"
+  default_prompt: "Use $go-contract-mode to grill this feature's contract with me and write settled decisions into its real project files as a compilable skeleton. Write each body's behavior as intent comments with a stub return, including after design approval."
+policy:
+  allow_implicit_invocation: true

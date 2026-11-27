@@ -1,0 +1,6 @@
+interface:
+  display_name: "Interview Helper Builder"
+  short_description: "Build candidate-specific offline interview helper HTML"
+  default_prompt: "Use $interview-helper-builder to turn this role and candidate context into an approved interview plan and a standalone local HTML interview helper."
+policy:
+  allow_implicit_invocation: false

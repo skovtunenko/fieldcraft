@@ -1,0 +1,483 @@
+{
+  "schema": 1,
+  "lang": "en",
+  "target": "/tmp/skill-audit-sample/violating",
+  "snapshot": "2026-10-18",
+  "audited": "2026-10-18",
+  "hosts": "all (assumed: nothing states a host)",
+  "rules": [
+    {
+      "id": "BP-01",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-02",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-03",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-56",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-04",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-05",
+      "status": "fail",
+      "evidence": "SKILL.md:2 `Claude_Helper` has `C`, `H`, `_`"
+    },
+    {
+      "id": "BP-06",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-07",
+      "status": "fail",
+      "evidence": "SKILL.md:2 `Claude_Helper` holds `claude`"
+    },
+    {
+      "id": "BP-08",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-09",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-10",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-11",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-12",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-13",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-14",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-15",
+      "status": "fail",
+      "evidence": "SKILL.md:3 \"I can help you\""
+    },
+    {
+      "id": "BP-16",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-17",
+      "status": "fail",
+      "evidence": "SKILL.md body is 516 lines"
+    },
+    {
+      "id": "BP-18",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-19",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-20",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-21",
+      "status": "fail",
+      "evidence": "references/doc2.md linked only from references/basics.md:3"
+    },
+    {
+      "id": "BP-22",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-23",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-24",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-25",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-26",
+      "status": "fail",
+      "evidence": "SKILL.md:11 \"Before August 2025\""
+    },
+    {
+      "id": "BP-27",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-28",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-29",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-30",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-31",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-32",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-33",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-34",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-35",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-36",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-37",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-38",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-39",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-40",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-41",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-42",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-43",
+      "status": "fail",
+      "evidence": "scripts/fill_form.py:2 `TIMEOUT = 47`"
+    },
+    {
+      "id": "BP-44",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-45",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-46",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-47",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-48",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-49",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-50",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-51",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-52",
+      "status": "fail",
+      "evidence": "references/doc2.md"
+    },
+    {
+      "id": "BP-53",
+      "status": "fail",
+      "evidence": "SKILL.md:21-520 inline field listing"
+    },
+    {
+      "id": "BP-54",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "BP-55",
+      "status": "fail",
+      "evidence": "SKILL.md:15 bare `create_issue`"
+    },
+    {
+      "id": "OS-01",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "OS-02",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "OS-03",
+      "status": "fail",
+      "evidence": "SKILL.md:3 plain value holds `: `"
+    },
+    {
+      "id": "OS-04",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "OS-05",
+      "status": "n/a",
+      "evidence": "Host-specific rule; target hosts assumed `all`."
+    },
+    {
+      "id": "OS-06",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "OS-07",
+      "status": "n/a",
+      "evidence": "Host-specific rule; target hosts assumed `all`."
+    },
+    {
+      "id": "OS-08",
+      "status": "n/a",
+      "evidence": "Host-specific rule; target hosts assumed `all`."
+    },
+    {
+      "id": "OS-09",
+      "status": "n/a",
+      "evidence": "Host-specific rule; target hosts assumed `all`."
+    },
+    {
+      "id": "OS-10",
+      "status": "n/a",
+      "evidence": "Host-specific rule; target hosts assumed `all`."
+    },
+    {
+      "id": "OS-11",
+      "status": "fail",
+      "evidence": "references/basics.md:123 `form-rules.md` is missing"
+    },
+    {
+      "id": "OS-12",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "OS-13",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "OS-14",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "OS-15",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "OS-16",
+      "status": "pass",
+      "evidence": "No defect found."
+    },
+    {
+      "id": "OS-17",
+      "status": "n/a",
+      "evidence": "Host-specific rule; target hosts assumed `all`."
+    },
+    {
+      "id": "OS-18",
+      "status": "n/a",
+      "evidence": "Host-specific rule; target hosts assumed `all`."
+    }
+  ],
+  "failures": [
+    {
+      "rule": "BP-07",
+      "location": "SKILL.md:2",
+      "why": "Reserved words in `name` are rejected by the Skills platform.",
+      "evidence": "`name: Claude_Helper` contains the reserved word `Claude`.",
+      "before": "name: Claude_Helper",
+      "after": "name: filling-pdf-forms",
+      "fix": "Rename the folder to `filling-pdf-forms` too (OS-02)."
+    },
+    {
+      "rule": "BP-15",
+      "location": "SKILL.md:3",
+      "why": "The description is injected into the system prompt; a first- or second-person voice hurts discovery.",
+      "evidence": "The description opens with \"I can help you with your files\" and embeds <b>Important</b></script><!-- markup.",
+      "range": "SKILL.md:3",
+      "fix": "Replace the whole of line 3 with the After line.",
+      "before": "description: I can help you with your files and documents. <b>Important</b>: I process data in many ways",
+      "after": "description: \"Fills PDF forms from a JSON mapping. Use when the user mentions PDF forms.\""
+    },
+    {
+      "rule": "OS-03",
+      "location": "SKILL.md:3",
+      "why": "YAML that does not parse loads the skill with no fields, so it never triggers.",
+      "evidence": "The plain `description` value contains `: ` after `</b>`.",
+      "fix_ref": "BP-15"
+    },
+    {
+      "rule": "BP-26",
+      "location": "SKILL.md:11",
+      "why": "Instructions that switch on a date go stale silently.",
+      "evidence": "\"Before August 2025, use the old export API. After that, use the new one.\"",
+      "before": "Before August 2025, use the old export API. After that, use the new one.",
+      "after": "Use the export API.\n\n<details>\n<summary>Old patterns</summary>\n\nThe legacy export API was retired in August 2025.\n</details>"
+    },
+    {
+      "rule": "OS-11",
+      "location": "references/basics.md:123",
+      "why": "A link to a missing file breaks wherever the skill is installed.",
+      "evidence": "`[the form rules](form-rules.md)` points to a file that does not exist.",
+      "fix": "Remove the link, or add `references/form-rules.md` with the field limits."
+    },
+    {
+      "rule": "BP-43",
+      "location": "scripts/unused_helper.py:3",
+      "why": "An unexplained constant cannot be tuned safely.",
+      "evidence": "`TIMEOUT = 47` has no comment.",
+      "before": "TIMEOUT = 47",
+      "after": "TIMEOUT = 47  # seconds: the slowest form in testing took 40 s"
+    },
+    {
+      "rule": "BP-52",
+      "location": "references/doc2.md",
+      "why": "A file name should say what the file holds, so Claude opens the right one.",
+      "evidence": "`doc2.md` says nothing about its content.",
+      "fix": "Rename `references/doc2.md` to `references/form-validation-rules.md` and update every link to it."
+    },
+    {
+      "rule": "BP-05",
+      "location": "SKILL.md:2",
+      "why": "The name field allows only lowercase letters, digits, and hyphens.",
+      "evidence": "`Claude_Helper` has capitals and an underscore.",
+      "fix_ref": "BP-07"
+    },
+    {
+      "rule": "BP-55",
+      "location": "SKILL.md:15",
+      "why": "Without the server prefix Claude may not find the tool when several MCP servers are connected.",
+      "evidence": "\"call the create_issue tool\" names the tool bare.",
+      "before": "call the create_issue tool",
+      "after": "call the <server>:create_issue tool",
+      "fix": "Replace <server> with the MCP server that provides create_issue, such as GitHub.",
+      "placeholders": [
+        "<server>"
+      ]
+    },
+    {
+      "rule": "BP-21",
+      "location": "references/doc2.md",
+      "fix_location": "SKILL.md:17",
+      "why": "A file reached only through another file may be read only partly.",
+      "evidence": "Only references/basics.md:3 links references/doc2.md.",
+      "before": "See [the basics](references/basics.md).",
+      "after": "See [the basics](references/basics.md). For edge cases, see [edge cases](references/doc2.md)."
+    },
+    {
+      "rule": "BP-53",
+      "location": "SKILL.md:21-520",
+      "range": "SKILL.md:21-520",
+      "why": "Large reference data belongs in a bundled file; inline it costs context on every run.",
+      "evidence": "500 lines of `field_NNN` entries sit in the body.",
+      "fix": "Move lines 21-520 to references/form-fields.md and replace them with one line linking it.",
+      "before": "- `field_001`: text field number 1, maximum 40 characters.",
+      "after": "Field limits: see [references/form-fields.md](references/form-fields.md)."
+    },
+    {
+      "rule": "BP-17",
+      "location": "SKILL.md",
+      "why": "The whole body loads on every trigger.",
+      "evidence": "The body is 516 lines; 500 of them are the field listing (BP-53).",
+      "fix_ref": "BP-53"
+    }
+  ]
+}

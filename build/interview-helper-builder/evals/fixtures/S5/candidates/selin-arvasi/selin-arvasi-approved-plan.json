@@ -1,0 +1,49 @@
+{
+  "candidate": "Selin Arvasi",
+  "role": "Enterprise AI Architect",
+  "durationMinutes": 30,
+  "requirements": [
+    {"id": "R1", "text": "Runtime depth of LLM systems"},
+    {"id": "R2", "text": "Retrieval with access control"},
+    {"id": "R3", "text": "Client-facing delivery"},
+    {"id": "R4", "text": "Governance and audit"}
+  ],
+  "sections": [
+    {
+      "id": "s1", "title": "Runtime trace of a shipped system", "minutes": "10m", "requirementIds": ["R1"],
+      "questions": [
+        {"id": "q1", "origin": "prepared", "title": "One request end to end",
+         "ask": "Pick one LLM system you shipped. Trace a single user request from entry to answer: every hop, store, and model call.",
+         "purpose": "Separates hands-on runtime knowledge from reference-architecture fluency."},
+        {"id": "q2", "origin": "prepared", "title": "Timeout mid-answer",
+         "ask": "In that trace, a retrieval call times out after the model has started answering. What did the system actually do?",
+         "purpose": "Tests real failure handling, not target design."}
+      ]
+    },
+    {
+      "id": "s2", "title": "Retrieval and access control", "minutes": "8m", "requirementIds": ["R2"],
+      "questions": [
+        {"id": "q3", "origin": "prepared", "title": "Per-tenant filtering",
+         "ask": "Where exactly is a document filtered out for a user who must not see it: index, query, or answer? Why there?",
+         "purpose": "Tests ownership of access-control placement."}
+      ]
+    },
+    {
+      "id": "s3", "title": "Halyard ledger reconciliation", "minutes": "7m", "requirementIds": ["R3"],
+      "questions": [
+        {"id": "q4", "origin": "new", "title": "Halyard ledger",
+         "ask": "On the Halyard ledger reconciliation, how did you agree the mismatch threshold with the client's finance team?",
+         "purpose": "Selin-specific delivery probe."}
+      ]
+    },
+    {
+      "id": "s4", "title": "Brightwater cutover governance", "minutes": "5m", "requirementIds": ["R4"],
+      "questions": [
+        {"id": "q5", "origin": "new", "title": "Brightwater cutover",
+         "ask": "During the Brightwater cutover, who could stop the release, and did anyone use that right?",
+         "purpose": "Selin-specific governance probe."}
+      ]
+    }
+  ],
+  "approval": {"by": "Interviewer", "at": "2026-10-20T09:10:00+02:00", "quote": "Approved for Selin, generate it."}
+}

