@@ -1,0 +1,6 @@
+interface:
+  display_name: "uv Only"
+  short_description: "Route all Python work through uv/uvx"
+  default_prompt: "Use $uv-only to route Python execution, tooling, and dependencies through uv/uvx."
+policy:
+  allow_implicit_invocation: true
