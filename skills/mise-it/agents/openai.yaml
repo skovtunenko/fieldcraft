@@ -1,0 +1,6 @@
+interface:
+  display_name: "Mise It"
+  short_description: "Turn work insights into reliable mise automation"
+  default_prompt: "Use $mise-it to extract useful routines from this session, review existing mise automation, or set up this folder for it, and propose concrete changes for my approval."
+policy:
+  allow_implicit_invocation: true

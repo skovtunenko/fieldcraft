@@ -1,0 +1,6 @@
+interface:
+  display_name: "Orchestrator"
+  short_description: "Work directly, delegate to subagents only for a named advantage"
+  default_prompt: "orchestrator on"
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+echo "Error: poetry is disabled. Use uv instead:" >&2
+echo "  Initialize: uv init" >&2
+echo "  Add dependency: uv add PACKAGE" >&2
+echo "  Sync: uv sync" >&2
+echo "  Run: uv run COMMAND" >&2
+exit 1

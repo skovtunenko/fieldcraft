@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+echo "Error: pip is disabled. Use uv instead:" >&2
+echo "  Script dependency: uv run --with PACKAGE SCRIPT" >&2
+echo "  Project dependency: uv add PACKAGE" >&2
+exit 1

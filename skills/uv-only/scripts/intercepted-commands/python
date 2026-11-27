@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+deny_module() {
+  case $1 in
+    pip)
+      echo "Error: 'python -m pip' is disabled. Use 'uv add PACKAGE' or 'uv run --with PACKAGE ...'." >&2
+      ;;
+    venv)
+      echo "Error: 'python -m venv' is disabled. Use 'uv venv'." >&2
+      ;;
+    py_compile)
+      echo "Error: 'python -m py_compile' is disabled. Use 'uv run python -m ast FILE >/dev/null'." >&2
+      ;;
+  esac
+  exit 1
+}
+
+previous=
+for argument in "$@"; do
+  case $argument in
+    -mpip|-mvenv|-mpy_compile)
+      deny_module "${argument#-m}"
+      ;;
+  esac
+
+  if [[ $previous == -m ]]; then
+    case $argument in
+      pip|venv|py_compile)
+        deny_module "$argument"
+        ;;
+    esac
+  fi
+  previous=$argument
+done
+
+if ! command -v uv >/dev/null 2>&1; then
+  echo "Error: 'python' is intercepted, but uv is unavailable." >&2
+  exit 1
+fi
+
+resolve_uv_python() {
+  local shim_dir candidate candidate_dir
+  shim_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
+  candidate=$(uv python find --managed-python 2>/dev/null || true)
+  if [[ -n $candidate && -x $candidate ]]; then
+    candidate_dir=$(cd "$(dirname "$candidate")" && pwd)
+    if [[ $candidate_dir != "$shim_dir" ]]; then
+      printf '%s\n' "$candidate"
+      return
+    fi
+  fi
+
+  while IFS= read -r candidate; do
+    [[ -n $candidate ]] || continue
+    candidate_dir=$(cd "$(dirname "$candidate")" && pwd)
+    [[ $candidate_dir == "$shim_dir" ]] || {
+      printf '%s\n' "$candidate"
+      return
+    }
+  done < <(type -aP python3 2>/dev/null)
+
+  while IFS= read -r candidate; do
+    [[ -n $candidate ]] || continue
+    candidate_dir=$(cd "$(dirname "$candidate")" && pwd)
+    [[ $candidate_dir == "$shim_dir" ]] || {
+      printf '%s\n' "$candidate"
+      return
+    }
+  done < <(type -aP python 2>/dev/null)
+
+  return 1
+}
+
+UV_PYTHON=$(resolve_uv_python) || {
+  echo "Error: unable to locate a Python interpreter outside intercepted-commands." >&2
+  exit 1
+}
+
+exec uv run --python "$UV_PYTHON" python "$@"

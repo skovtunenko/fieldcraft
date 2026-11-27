@@ -1,0 +1,6 @@
+interface:
+  display_name: "Ambition Lens"
+  short_description: "Find where a task could aim higher, from evidence in the conversation"
+  default_prompt: "Use $ambition-lens to show more ambitious ways to do the task in this conversation."
+policy:
+  allow_implicit_invocation: false
