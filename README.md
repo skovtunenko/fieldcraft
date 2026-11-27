@@ -3,8 +3,12 @@
 [![check](https://github.com/skovtunenko/fieldcraft/actions/workflows/check.yml/badge.svg)](https://github.com/skovtunenko/fieldcraft/actions/workflows/check.yml)
 [![release](https://img.shields.io/github/v/release/skovtunenko/fieldcraft?sort=date)](https://github.com/skovtunenko/fieldcraft/releases/latest)
 [![license](https://img.shields.io/github/license/skovtunenko/fieldcraft)](https://github.com/skovtunenko/fieldcraft/blob/main/LICENSE)
+[![skills](https://img.shields.io/badge/skills-10-blue)](#skills)
+[![agents](https://img.shields.io/badge/agents-Claude%20Code%20%C2%B7%20Codex-6e56cf)](#install)
+[![evals](https://img.shields.io/badge/evals-uv%20%C2%B7%20node-de5fe9)](#evals)
 
-Agent skills for daily engineering work and for how an agent talks to you.
+Agent skills for engineering work, skill audits, interviews, and how an agent
+talks to you.
 Each skill is one folder with a `SKILL.md` in the Agent Skills format, which
 Claude Code and Codex read. Each skill ships with its eval cases.
 
@@ -47,12 +51,13 @@ By hand: copy `skills/<name>` into the skills folder of your agent.
 ## Evals
 
 `build/<name>/evals/` holds the eval cases of each skill: prompts, the boxes
-that a pass needs, and grader prompts. Some skills also have a checker
-script. Run a checker from its `evals/` folder:
+that a pass needs, grader prompts, and fixtures. Some skills also have
+checker or test scripts; they need [uv](https://docs.astral.sh/uv/), and some
+also need Node.js. Run a script from its `evals/` folder:
 
 ```bash
-cd build/reply-contract/evals
-uv run check_reply.py --self-test
+(cd build/reply-contract/evals && uv run check_reply.py --self-test)
+(cd build/interview-helper-builder/evals && bash scripts/test_generator.sh)
 ```
 
 Each `cases.md` starts with how to run its cases. Keep run results outside
@@ -62,7 +67,7 @@ the repository.
 
 ```text
 skills/<name>/        the skill: SKILL.md, agents/, references/, assets/
-build/<name>/evals/   eval cases, grader prompts, checker scripts
+build/<name>/evals/   eval cases, grader prompts, fixtures, test scripts
 .mise/tasks/          the check task
 ```
 
